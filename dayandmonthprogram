@@ -1,0 +1,100 @@
+/******************************************************************************
+In this program, the user inputs a number. The number indicates a day in a year
+and has a range between 1 and 365. After a number is entered, the program outputs
+the exact month and date that correlates with the number of days in the year.
+*******************************************************************************/
+#include <iostream>
+
+using namespace std;
+
+class DayOfYear
+{
+  private:
+    int day;
+    static string month[12];
+    
+  public:
+    
+    DayOfYear(int d) 
+     { day = d; } 
+    void print();
+
+};
+
+string DayOfYear::month[12] = {"January", "February", "March", "April", "May", "June", "July", "August", "September", 
+    "October", "November", "December"};
+void DayOfYear::print()
+{
+    if(day <= 31)
+    {
+      cout << month[0] << " " << day;
+    }
+    else if(day > 31 && day <= 59)
+    {
+     day = day - 31;    
+     cout << month[1] << " " << day;
+    }
+    else if(day > 59 && day <= 90) 
+    {
+     day = day - 59;    
+     cout << month[2] << " " << day;  
+    }
+    else if(day > 90 && day <= 120)
+    {
+     day = day - 90;  
+     cout << month[3] << " " << day;  
+    }
+    else if(day > 120 && day <= 151)
+    {
+     day = day - 120;  
+     cout << month[4] << " " << day;
+    }
+    else if(day > 151 && day <= 181) 
+    {
+     day = day - 151;   
+     cout << month[5] << " " << day; 
+    }
+    else if(day > 181 && day <= 212)
+    {
+     day = day - 181;    
+     cout << month[6] << " " << day;  
+    }
+    else if(day > 212 && day <= 243)
+    {
+     day = day - 212;    
+     cout << month[7] << " " << day;
+    }
+    else if(day > 243 && day <= 273) 
+    {
+     day = day - 243;    
+     cout << month[8] << " " << day;
+    }
+    else if(day > 273 && day <= 304)
+    {
+     day = day - 273;    
+     cout << month[9] << " " << day;  
+    }
+    else if(day > 304 && day <= 334)
+    {
+     day = day - 304;   
+     cout << month[10] << " " << day;
+    }
+    else if(day > 334 && day <= 365) 
+    {
+     day = day - 334; 
+     cout << month[11] << " " << day;   
+    }
+    
+}
+    
+int main()    
+{
+ int userNum;
+ cout << "Type the number of days (must be within 365 days): " << endl;
+ cin >> userNum;
+ DayOfYear number(userNum);
+ cout << "The date and month is: " << endl;
+ number.print();
+    
+ return 0;    
+} 
