@@ -1,0 +1,117 @@
+/******************************************************************************
+This is a program that lets the user input the number of tests and their score.
+The program then outputs the scores in ascending order and gives the average test
+score. The project specializes in the use of pointers.
+*******************************************************************************/
+
+
+#include <iostream>
+
+using namespace std;
+
+void arrSelectSort(double *,string *, int);
+void showArray(double , int);
+void getAverage(double *, int);
+
+int main()
+{   double *TestScore = nullptr;
+    string *name = nullptr;
+    int numTest;
+    
+    cout << "Enter number of tests here: ";
+    cin >> numTest;
+    TestScore = new double[numTest];
+    name = new string[numTest];
+    
+    cout << "Enter score of test and name of student separated by space." << endl;
+    
+     for(int count = 0; count < numTest; count++)
+    {  do
+       {
+        cout << "Enter test score and name #" << count + 1 << ": ";
+        cin >> *(TestScore + count);
+        cin >> *(name + count);
+        if (*(TestScore + count) < 0)
+        {
+            cout << "Tests cannot be negative, please re-enter." << endl;
+        }
+       } while (*(TestScore + count) < 0);
+        
+    
+    } 
+    
+    
+    arrSelectSort(TestScore, name, numTest);
+
+    
+    cout << "Tests in ascending order: " << endl;
+    
+    for(int i = 0; i < numTest; i ++)
+    {
+        cout << "Test " << i + 1 << ": " << *(TestScore + i) << endl;
+        cout << "Name " << i + 1 << ": " << *(name + i) << endl;
+    }
+    
+    getAverage(TestScore, numTest);
+    
+
+    return 0;
+}
+
+
+void arrSelectSort(double *arr,string *names, int size)
+{
+    int startScan, minIndex;
+    double minElem;
+    string stuNames;
+    for (startScan = 0; startScan < (size - 1); startScan++)
+    {
+        minIndex = startScan;
+        minElem = *(arr + startScan);
+        stuNames = *(names + startScan);
+        for(int index = startScan + 1; index < size; index++)
+        {
+            if (*(arr + index) < minElem)
+            {
+                minElem = *(arr + index);
+                stuNames = *(names + index);
+                minIndex = index;
+            }
+        }
+        *(arr + minIndex) = *(arr + startScan);
+        *(names + minIndex) = *(names + startScan);
+        *(arr + startScan) = minElem;
+        *(names + startScan) = stuNames;
+    }
+}
+
+
+void getScore (double *arr, int size)
+    {    
+    for(int count = 0; count < size; count++)
+    {  do
+       {
+        cout << "Enter score of test " << count + 1 << ": ";
+        cin >> *(arr + count);
+        if (*(arr + count) < 0)
+        {
+            cout << "Tests cannot be negative, please re-enter." << endl;
+        }
+       } while (*(arr + count) < 0);
+        
+    
+    }
+}
+
+void getAverage (double *arr, int size)
+{   double sum;
+    double average;
+    sum = arr[0];
+    for(int count = 0; count < size - 1; count ++)
+    {  
+      sum = sum + *(arr + (count + 1)); 
+        
+    }
+    average = sum / size;
+    cout << "The average of the test score is: " << average << endl;
+}
