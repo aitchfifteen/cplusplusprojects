@@ -1,0 +1,211 @@
+/******************************************************************************
+This menu-driven user interface program prompts the user to enter information for 
+20 accounts. In the main menu, the user is shown multiple options to choose from.
+The program allows the user to enter new information, change the content of
+existing information, display all information, or exit the program.
+*******************************************************************************/
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+struct Info
+{
+    string name = "Not yet entered";
+    string address = "Not yet entered";
+    string city = "Not yet entered";
+    string state = "Not yet entered";
+    int zipcode = 0;
+    string telephone = "Not yet entered";
+    double balance = 0;
+    string date = "Not yet entered";
+};
+
+int mainMenu(int);
+void getInfo(Info *, const int);
+void showData(Info *, const int);
+void changeData(Info *, const int);
+
+int main()
+{   const int INFO_SIZE = 20;
+    Info record[INFO_SIZE];
+    int choice;
+    choice = mainMenu(choice);
+    
+    do
+    {
+    if(choice == 1)
+    {
+        
+     getInfo(record, INFO_SIZE);
+     choice = mainMenu(choice);
+    }
+    
+    if(choice == 2)
+    {
+        
+      changeData(record, INFO_SIZE);
+      choice = mainMenu(choice);  
+    }
+    
+    if(choice == 3)
+    {
+        
+      showData(record, INFO_SIZE);
+      choice = mainMenu(choice);  
+    }
+    if(choice == 4)
+    
+    {
+        
+     cout << "Exiting program..." << endl;   
+        
+    }
+    }
+    while(choice != 4);
+    
+    
+    
+    
+    
+
+    return 0;
+}
+
+
+
+int mainMenu(int)
+{   int userNum;
+    do
+    {
+    
+    cout << "Type the number to access the functions from the main menu below: " << endl;
+    cout << "1. Enter new account information." << endl;
+    cout << "2. Change account information." << endl;
+    cout << "3. Display all account information." << endl;
+    cout << "4. Exit the program." << endl;
+    cout << "Type your input: ";
+    cin >> userNum;
+    if(userNum <= 4 && userNum != 0)
+    {
+        cout << "You have chose option " << userNum << endl;
+    }
+    else
+    { 
+        cout << "Error. Invalid input" << endl;
+    }   
+    } while(userNum > 4 || userNum == 0);
+    return userNum;
+
+}
+
+
+
+
+void getInfo(Info *data, const int size)
+{   cin.ignore();
+
+    cout << "Type your information for each customer account here. " << endl;
+    for(int count = 0; count < size; count ++)
+    {
+        
+        cout << "You are entering the data for customer #" << count << "." << endl;
+        cout << "Enter the name of customer: " << endl;
+        getline(cin, data[count].name);
+        cout << "Enter the customer's address: " << endl;
+        getline(cin, data[count].address);
+        cout << "Enter the city that the customer lives in: " << endl;
+        getline(cin, data[count].city);
+        cout << "Enter the state that the customer lives in: " << endl;
+        getline(cin, data[count].state);
+        cout << "Enter the zip code: " << endl;
+        cin >> data[count].zipcode;
+        cout << "Enter the customer's phone number: " << endl;
+        cin.ignore();
+        getline(cin, data[count].telephone);
+        do
+        {
+        cout << "NOTICE: BALANCE CANNOT BE NEGATIVE." << endl;
+        cout << "Enter the customer's balance: " << endl;
+        cin >> data[count].balance;
+        }
+        while(data[count].balance < 0);
+        cout << "Enter the customer's last payment date: " << endl;
+        cin.ignore();
+        getline(cin, data[count].date);
+        cout << endl;
+        cout << "You have entered information for customer #" << count << " ." << endl;
+        cout << "Press ENTER to continue...";
+        cin.ignore();
+    }
+    
+    
+}
+
+void showData(Info *data, const int size)
+{   cin.ignore();
+    for(int count = 0; count < size; count ++)
+    {
+    cout << "Showing data for customer #" << count << "." << endl;
+    cout << "Name: " << data[count].name << endl;
+    cout << "Address: " << data[count].address << endl;
+    cout << "City: " << data[count].city << endl;
+    cout << "State: " << data[count].state << endl;
+    cout << "Zipcode: " << data[count].zipcode << endl;
+    cout << "Telephone number: " << data[count].telephone << endl;
+    cout << "Balance: " << data[count].balance << "$" << endl;
+    cout << "Last payment date: " << data[count].date << endl;
+    cout << "Press ENTER to continue...";
+    cin.ignore();
+    }
+    
+}
+
+void changeData(Info *data, const int size)
+{
+    int cusNum;
+    cout << "Enter the customer's number: " << endl;
+    cin >> cusNum;
+    cout << "Showing data for customer #" << cusNum;
+    cout << endl;
+    cout << "Name: " << data[cusNum].name << endl;
+    cout << "Address: " << data[cusNum].address << endl;
+    cout << "City: " << data[cusNum].city << endl;
+    cout << "State: " << data[cusNum].state << endl;
+    cout << "Zipcode: " << data[cusNum].zipcode << endl;
+    cout << "Telephone number: " << data[cusNum].telephone << endl;
+    cout << "Balance: " << data[cusNum].balance << "$" << endl;
+    cout << "Last payment date: " << data[cusNum].date << endl;
+    cout << endl;
+    
+    cout << "Enter the new data for customer #" << cusNum << "." << endl;
+    cout << "Enter the name of customer: " << endl;
+    cin.ignore();
+    getline(cin, data[cusNum].name);
+    cout << "Enter the customer's address: " << endl;
+    getline(cin, data[cusNum].address);
+    cout << "Enter the city that the customer lives in: " << endl;
+    getline(cin, data[cusNum].city);        
+    cout << "Enter the state that the customer lives in: " << endl;
+    getline(cin, data[cusNum].state);
+    cout << "Enter the zip code: " << endl;
+    cin >> data[cusNum].zipcode;
+    cout << "Enter the customer's phone number: " << endl;
+    cin.ignore();
+    getline(cin, data[cusNum].telephone);
+    do
+    {
+      cout << "NOTICE: BALANCE CANNOT BE NEGATIVE." << endl;
+      cout << "Enter the customer's balance: " << endl;
+      cin >> data[cusNum].balance;
+    }
+    while(data[cusNum].balance < 0);
+    cout << "Enter the customer's last payment date: " << endl;
+    cin.ignore();
+    getline(cin, data[cusNum].date);
+    cout << endl;
+    cout << "You have entered information for customer #" << cusNum << " ." << endl;
+    
+    
+}
