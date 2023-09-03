@@ -1,0 +1,33 @@
+/******************************************************************************
+This project involves the user inputing two numbers, in which the first number is
+a base integer and the second is the exponent integer for the first one. The program
+outputs a number being raised to the power of another number. This project emphasizes
+on the use of recursive function in coding.
+*******************************************************************************/
+#include <iostream>
+
+using namespace std;
+
+int Power(int, int);
+
+int main()
+{   int baseNum;
+    int powerNum;
+    cout <<"Enter the base integer: " << endl;
+    cin >> baseNum;
+    cout << "Enter the exponent integer: " << endl;
+    cin >> powerNum;
+    cout << baseNum << " raised to the power of " << powerNum << " is: " << endl;
+    cout << Power(baseNum, powerNum) << endl;
+
+    return 0;
+}
+
+int Power(int userNum, int exponent)
+{   
+    if(exponent == 0)
+     return 1;
+    else
+     return userNum * Power(userNum, exponent - 1);
+    
+}
